@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_862d6d6d406f46ba0abdfbb6a8bd20a5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border: 1px solid gray;
+    opacity: 0.9;
+    font-family: Arial;
+    max-height: 200px;
+    overflow-y: auto;
+">
+    <b>Subtitle</b>
+
+    <div style="margin: 5px 0;">
+        <span style="color: pink; font-size: 18px;">■</span>
+        nightclub/bar
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: darkred; font-size: 18px;">■</span>
+        sauna
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: orange; font-size: 18px;">■</span>
+        restaurant
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: purple; font-size: 18px;">■</span>
+        association
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: green; font-size: 18px;">■</span>
+        accommodation
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: gray; font-size: 18px;">■</span>
+        cultural space
+    </div>
+    
+    <div style="margin: 5px 0;">
+        <span style="color: lightblue; font-size: 18px;">■</span>
+        store
+    </div>
+    </div>
+    
+            <div class="folium-map" id="map_862d6d6d406f46ba0abdfbb6a8bd20a5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_862d6d6d406f46ba0abdfbb6a8bd20a5 = L.map(
+                "map_862d6d6d406f46ba0abdfbb6a8bd20a5",
+                {
+                    center: [38.7223, -9.1393],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2392a4a52fc42d825160505cc69a68e6 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2392a4a52fc42d825160505cc69a68e6.addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+
+            var geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a = {
+  "collapsed": false,
+  "position": "topright",
+  "defaultMarkGeocode": true,
+  "zoom": 11,
+  "provider": "nominatim",
+  "providerOptions": {
+},
+};
+
+            // note: geocoder name should start with lowercase
+            var geocoderName_geocoder_3b01f66a0b1ff888be16d3d45f3d394a = geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a["provider"];
+
+            var customGeocoder_geocoder_3b01f66a0b1ff888be16d3d45f3d394a = L.Control.Geocoder[ geocoderName_geocoder_3b01f66a0b1ff888be16d3d45f3d394a ](
+                geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a['providerOptions']
+            );
+            geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a["geocoder"] = customGeocoder_geocoder_3b01f66a0b1ff888be16d3d45f3d394a;
+
+            L.Control.geocoder(
+                geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a
+            ).on('markgeocode', function(e) {
+                var zoom = geocoderOpts_geocoder_3b01f66a0b1ff888be16d3d45f3d394a['zoom'] || map_862d6d6d406f46ba0abdfbb6a8bd20a5.getZoom();
+                map_862d6d6d406f46ba0abdfbb6a8bd20a5.setView(e.geocode.center, zoom);
+            }).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+
+        
+    
+            var marker_c17bb0068d8d05127a11ac7781e5d695 = L.marker(
+                [38.7174149, -9.1519004],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_524fc7b49cf20396010e77057571ddcf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_237490658e4fb76e3bd577461606fb6a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0076676332685233a76cb842777c2f65 = $(`<div id="html_0076676332685233a76cb842777c2f65" style="width: 100.0%; height: 100.0%;">         <h4>TRUMPS</h4>         <p>         <b>Address: </b> Trumps Lisbon, 104B, Rua da Imprensa Nacional, São Mamede, Santo António, Lisboa, 1250-127, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://trumps.pt/shop/<br>         </p>         </div>`)[0];
+                popup_237490658e4fb76e3bd577461606fb6a.setContent(html_0076676332685233a76cb842777c2f65);
+            
+        
+
+        marker_c17bb0068d8d05127a11ac7781e5d695.bindPopup(popup_237490658e4fb76e3bd577461606fb6a)
+        ;
+
+        
+    
+    
+            marker_c17bb0068d8d05127a11ac7781e5d695.bindTooltip(
+                `<div>
+                     TRUMPS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c17bb0068d8d05127a11ac7781e5d695.setIcon(icon_524fc7b49cf20396010e77057571ddcf);
+            
+    
+            var marker_6429bff95af8a15f61e22c1fce998311 = L.marker(
+                [38.7160598, -9.1501583],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_d32275cb779c1f5d61de33f8ca448135 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7892b168591758c952fa698a7a680f99 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5202ae4c379d18107c4246564659fe0b = $(`<div id="html_5202ae4c379d18107c4246564659fe0b" style="width: 100.0%; height: 100.0%;">         <h4>SOCIETY</h4>         <p>         <b>Address: </b> Rua Cecílio de Sousa, Mercês, Santo António, Misericórdia, Lisboa, 1200-423, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/societylisboa/?hl=en<br>         </p>         </div>`)[0];
+                popup_7892b168591758c952fa698a7a680f99.setContent(html_5202ae4c379d18107c4246564659fe0b);
+            
+        
+
+        marker_6429bff95af8a15f61e22c1fce998311.bindPopup(popup_7892b168591758c952fa698a7a680f99)
+        ;
+
+        
+    
+    
+            marker_6429bff95af8a15f61e22c1fce998311.bindTooltip(
+                `<div>
+                     SOCIETY
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6429bff95af8a15f61e22c1fce998311.setIcon(icon_d32275cb779c1f5d61de33f8ca448135);
+            
+    
+            var marker_098901a2c876bcb5b193bd8c415cf0c8 = L.marker(
+                [38.7135842, -9.1446535],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_96e0622bd19b52c90c89cfe8f3ded478 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f7041832a74961b86451d93424243b93 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1a62280868f6cedc7608ac2ee9d0602f = $(`<div id="html_1a62280868f6cedc7608ac2ee9d0602f" style="width: 100.0%; height: 100.0%;">         <h4>FRIENDS</h4>         <p>         <b>Address: </b> Travessa da Água-da-Flor, Bairro Alto, Misericórdia, Lisboa, 1200-010, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/friendsbairroalto/?hl=en<br>         </p>         </div>`)[0];
+                popup_f7041832a74961b86451d93424243b93.setContent(html_1a62280868f6cedc7608ac2ee9d0602f);
+            
+        
+
+        marker_098901a2c876bcb5b193bd8c415cf0c8.bindPopup(popup_f7041832a74961b86451d93424243b93)
+        ;
+
+        
+    
+    
+            marker_098901a2c876bcb5b193bd8c415cf0c8.bindTooltip(
+                `<div>
+                     FRIENDS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_098901a2c876bcb5b193bd8c415cf0c8.setIcon(icon_96e0622bd19b52c90c89cfe8f3ded478);
+            
+    
+            var marker_7db29170ac0005dce5c16a112aac3cb0 = L.marker(
+                [38.7147594, -9.1540276],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_e4076093094414af6b382d4ff9e7cf2a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_257e1a7aab5ec077f758f1b96599f832 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e775eb54809200c228085252f0a42096 = $(`<div id="html_e775eb54809200c228085252f0a42096" style="width: 100.0%; height: 100.0%;">         <h4>POSH CLUB</h4>         <p>         <b>Address: </b> 157, Rua de São Bento, Amoreiras, Santa Isabel, Estrela, Lisboa, 1250-209, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.poshclublisbon.com/<br>         </p>         </div>`)[0];
+                popup_257e1a7aab5ec077f758f1b96599f832.setContent(html_e775eb54809200c228085252f0a42096);
+            
+        
+
+        marker_7db29170ac0005dce5c16a112aac3cb0.bindPopup(popup_257e1a7aab5ec077f758f1b96599f832)
+        ;
+
+        
+    
+    
+            marker_7db29170ac0005dce5c16a112aac3cb0.bindTooltip(
+                `<div>
+                     POSH CLUB
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7db29170ac0005dce5c16a112aac3cb0.setIcon(icon_e4076093094414af6b382d4ff9e7cf2a);
+            
+    
+            var marker_289b69a9743793698746cb551db20600 = L.marker(
+                [38.7171429, -9.1514721],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_7fd2b6446724df1c599daebac57a2c84 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42b1ae265c2d3e22b7af27d841c5ce0f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6b80bcce9bf052375c82a91f79565253 = $(`<div id="html_6b80bcce9bf052375c82a91f79565253" style="width: 100.0%; height: 100.0%;">         <h4>CORVO</h4>         <p>         <b>Address: </b> Calçada Engenheiro Miguel Pais, São Mamede, Santo António, Lisboa, 1250-127, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> (fechou)https://www.instagram.com/corvo_principe_real/ <br>         </p>         </div>`)[0];
+                popup_42b1ae265c2d3e22b7af27d841c5ce0f.setContent(html_6b80bcce9bf052375c82a91f79565253);
+            
+        
+
+        marker_289b69a9743793698746cb551db20600.bindPopup(popup_42b1ae265c2d3e22b7af27d841c5ce0f)
+        ;
+
+        
+    
+    
+            marker_289b69a9743793698746cb551db20600.bindTooltip(
+                `<div>
+                     CORVO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_289b69a9743793698746cb551db20600.setIcon(icon_7fd2b6446724df1c599daebac57a2c84);
+            
+    
+            var marker_9c1f5068ebee8687431baba203c5452e = L.marker(
+                [38.7159879, -9.1503266],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_147bb23082a605e768d08a9f4f0b7700 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_99db31337fbff0c7905e308773e5d7f6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_84e5b49b06ec4de931e35d4b5d660247 = $(`<div id="html_84e5b49b06ec4de931e35d4b5d660247" style="width: 100.0%; height: 100.0%;">         <h4>BAR CRU</h4>         <p>         <b>Address: </b> Bar Cru, 170, Rua de São Marçal, Mercês, Santo António, Misericórdia, Lisboa, 1200-423, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://thebarcru.com/<br>         </p>         </div>`)[0];
+                popup_99db31337fbff0c7905e308773e5d7f6.setContent(html_84e5b49b06ec4de931e35d4b5d660247);
+            
+        
+
+        marker_9c1f5068ebee8687431baba203c5452e.bindPopup(popup_99db31337fbff0c7905e308773e5d7f6)
+        ;
+
+        
+    
+    
+            marker_9c1f5068ebee8687431baba203c5452e.bindTooltip(
+                `<div>
+                     BAR CRU
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9c1f5068ebee8687431baba203c5452e.setIcon(icon_147bb23082a605e768d08a9f4f0b7700);
+            
+    
+            var marker_0d72a32a315e57c66176a42b6d1b5ac4 = L.marker(
+                [38.7127697, -9.1450332],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_ee287fa16a9b91980fb4bffdb475e065 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_66c8e0b2518d106c5de8a229ec14ad4a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cc21cacf33405a0ee031306aa3901f02 = $(`<div id="html_cc21cacf33405a0ee031306aa3901f02" style="width: 100.0%; height: 100.0%;">         <h4>MARIA LISBOA</h4>         <p>         <b>Address: </b> Rua da Atalaia, Bairro Alto, Misericórdia, Lisboa, 1200-043, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.facebook.com/MariaLisboaClub/<br>         </p>         </div>`)[0];
+                popup_66c8e0b2518d106c5de8a229ec14ad4a.setContent(html_cc21cacf33405a0ee031306aa3901f02);
+            
+        
+
+        marker_0d72a32a315e57c66176a42b6d1b5ac4.bindPopup(popup_66c8e0b2518d106c5de8a229ec14ad4a)
+        ;
+
+        
+    
+    
+            marker_0d72a32a315e57c66176a42b6d1b5ac4.bindTooltip(
+                `<div>
+                     MARIA LISBOA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0d72a32a315e57c66176a42b6d1b5ac4.setIcon(icon_ee287fa16a9b91980fb4bffdb475e065);
+            
+    
+            var marker_eb69b07aa52cb0a1fed0fda2d353435a = L.marker(
+                [38.7359566, -9.1319704],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_c32dae6e936c55ce8efed886d74746c8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52d957bf2ce8cb376a54909b53b20408 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_aa6663e78fc3f5d88466f4561fdc65fa = $(`<div id="html_aa6663e78fc3f5d88466f4561fdc65fa" style="width: 100.0%; height: 100.0%;">         <h4>VLADA LOUNGE</h4>         <p>         <b>Address: </b> 8, Rua Rosa Damasceno, Arroios, Lisboa, 1900-936, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/vladalounge/?hl=en<br>         </p>         </div>`)[0];
+                popup_52d957bf2ce8cb376a54909b53b20408.setContent(html_aa6663e78fc3f5d88466f4561fdc65fa);
+            
+        
+
+        marker_eb69b07aa52cb0a1fed0fda2d353435a.bindPopup(popup_52d957bf2ce8cb376a54909b53b20408)
+        ;
+
+        
+    
+    
+            marker_eb69b07aa52cb0a1fed0fda2d353435a.bindTooltip(
+                `<div>
+                     VLADA LOUNGE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eb69b07aa52cb0a1fed0fda2d353435a.setIcon(icon_c32dae6e936c55ce8efed886d74746c8);
+            
+    
+            var marker_36ed1359ce72fac0c4b3d809e6cc2529 = L.marker(
+                [38.7160598, -9.1501583],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_706c1e67222eab26cabe4eb984605f17 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7daa86a9227722faee391752fde1d184 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1a57503701adf23bc1a80ff0f21ab34b = $(`<div id="html_1a57503701adf23bc1a80ff0f21ab34b" style="width: 100.0%; height: 100.0%;">         <h4>CONSTRUCTION</h4>         <p>         <b>Address: </b> Rua Cecílio de Sousa, Mercês, Santo António, Misericórdia, Lisboa, 1200-423, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/construction_bar/?hl=en<br>         </p>         </div>`)[0];
+                popup_7daa86a9227722faee391752fde1d184.setContent(html_1a57503701adf23bc1a80ff0f21ab34b);
+            
+        
+
+        marker_36ed1359ce72fac0c4b3d809e6cc2529.bindPopup(popup_7daa86a9227722faee391752fde1d184)
+        ;
+
+        
+    
+    
+            marker_36ed1359ce72fac0c4b3d809e6cc2529.bindTooltip(
+                `<div>
+                     CONSTRUCTION
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_36ed1359ce72fac0c4b3d809e6cc2529.setIcon(icon_706c1e67222eab26cabe4eb984605f17);
+            
+    
+            var marker_0f51a609f2d7eb8114c06e545429176b = L.marker(
+                [38.7147899, -9.1498756],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_c30b8429861c6ed157b64f0c575f0f2e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ad3266e9dd37b561b11b6f7287c7161d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_580a9e1c1bd433f61120832d748f1b34 = $(`<div id="html_580a9e1c1bd433f61120832d748f1b34" style="width: 100.0%; height: 100.0%;">         <h4>FINALMENTE CLUBE</h4>         <p>         <b>Address: </b> Finalmente Clube, 38, Rua da Palmeira, Mercês, Misericórdia, Lisboa, 1200-313, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.finalmenteclub.com/<br>         </p>         </div>`)[0];
+                popup_ad3266e9dd37b561b11b6f7287c7161d.setContent(html_580a9e1c1bd433f61120832d748f1b34);
+            
+        
+
+        marker_0f51a609f2d7eb8114c06e545429176b.bindPopup(popup_ad3266e9dd37b561b11b6f7287c7161d)
+        ;
+
+        
+    
+    
+            marker_0f51a609f2d7eb8114c06e545429176b.bindTooltip(
+                `<div>
+                     FINALMENTE CLUBE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0f51a609f2d7eb8114c06e545429176b.setIcon(icon_c30b8429861c6ed157b64f0c575f0f2e);
+            
+    
+            var marker_f35e3e1fbef88f232e40e3dfe387234d = L.marker(
+                [38.7234529, -9.1431873],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_a206f6e42ea3b072a740df6d2bade005 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_82736b6bdbec36d81d062cd96e7fc45c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_321c16d2f30835f6070dde2fc63d685e = $(`<div id="html_321c16d2f30835f6070dde2fc63d685e" style="width: 100.0%; height: 100.0%;">         <h4>DRAKO CLUB</h4>         <p>         <b>Address: </b> 11, Rua Nogueira e Sousa, Bairro Camões, Santo António, Lisboa, 1150-237, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.drako.club/<br>         </p>         </div>`)[0];
+                popup_82736b6bdbec36d81d062cd96e7fc45c.setContent(html_321c16d2f30835f6070dde2fc63d685e);
+            
+        
+
+        marker_f35e3e1fbef88f232e40e3dfe387234d.bindPopup(popup_82736b6bdbec36d81d062cd96e7fc45c)
+        ;
+
+        
+    
+    
+            marker_f35e3e1fbef88f232e40e3dfe387234d.bindTooltip(
+                `<div>
+                     DRAKO CLUB
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f35e3e1fbef88f232e40e3dfe387234d.setIcon(icon_a206f6e42ea3b072a740df6d2bade005);
+            
+    
+            var marker_c03226f9e0b572883ce143b3542b74c4 = L.marker(
+                [38.7109727, -9.144427],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_ea9542725c7abb9134b56de080488df6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e1460372ab256d6a40aa796b8ed2b535 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_77afde4bd515f411b860739a55e152a4 = $(`<div id="html_77afde4bd515f411b860739a55e152a4" style="width: 100.0%; height: 100.0%;">         <h4>PUREX</h4>         <p>         <b>Address: </b> 28, Rua das Salgadeiras, Bairro Alto, Misericórdia, Lisboa, 1200-036, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/purexclube/<br>         </p>         </div>`)[0];
+                popup_e1460372ab256d6a40aa796b8ed2b535.setContent(html_77afde4bd515f411b860739a55e152a4);
+            
+        
+
+        marker_c03226f9e0b572883ce143b3542b74c4.bindPopup(popup_e1460372ab256d6a40aa796b8ed2b535)
+        ;
+
+        
+    
+    
+            marker_c03226f9e0b572883ce143b3542b74c4.bindTooltip(
+                `<div>
+                     PUREX
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c03226f9e0b572883ce143b3542b74c4.setIcon(icon_ea9542725c7abb9134b56de080488df6);
+            
+    
+            var marker_3cbdcef11a95eba806dbc58d524f4ea2 = L.marker(
+                [38.714329, -9.1494246],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_6ce1dd6f80d5b6cf10939e965f91a886 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_84772640fd9e7cd2249058d18e52ae13 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e4549789786603d575cbbf8390ebdd6b = $(`<div id="html_e4549789786603d575cbbf8390ebdd6b" style="width: 100.0%; height: 100.0%;">         <h4>TR3S</h4>         <p>         <b>Address: </b> TR3S Lisboa, 2, Rua Ruben A. Leitão, Mercês, Misericórdia, Lisboa, 1200-392, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.tr3slisboa.com/<br>         </p>         </div>`)[0];
+                popup_84772640fd9e7cd2249058d18e52ae13.setContent(html_e4549789786603d575cbbf8390ebdd6b);
+            
+        
+
+        marker_3cbdcef11a95eba806dbc58d524f4ea2.bindPopup(popup_84772640fd9e7cd2249058d18e52ae13)
+        ;
+
+        
+    
+    
+            marker_3cbdcef11a95eba806dbc58d524f4ea2.bindTooltip(
+                `<div>
+                     TR3S
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3cbdcef11a95eba806dbc58d524f4ea2.setIcon(icon_6ce1dd6f80d5b6cf10939e965f91a886);
+            
+    
+            var marker_3c6e4f4c4d4ae85b78a77a32f4bd6023 = L.marker(
+                [38.7147389, -9.1520719],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_697adbc8b7e872ec06b4adb8e40ed2c6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1f1d694733e6373be959d74c68d33a64 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0c2e214dd6b40be707ad8e651ca5660a = $(`<div id="html_0c2e214dd6b40be707ad8e651ca5660a" style="width: 100.0%; height: 100.0%;">         <h4>WOOFX</h4>         <p>         <b>Address: </b> woof x Lisbon, 2 B, Rua Manuel Bernardes, Mercês, Santo António, Misericórdia, Lisboa, 1200-250, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/woofx.2b/<br>         </p>         </div>`)[0];
+                popup_1f1d694733e6373be959d74c68d33a64.setContent(html_0c2e214dd6b40be707ad8e651ca5660a);
+            
+        
+
+        marker_3c6e4f4c4d4ae85b78a77a32f4bd6023.bindPopup(popup_1f1d694733e6373be959d74c68d33a64)
+        ;
+
+        
+    
+    
+            marker_3c6e4f4c4d4ae85b78a77a32f4bd6023.bindTooltip(
+                `<div>
+                     WOOFX
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3c6e4f4c4d4ae85b78a77a32f4bd6023.setIcon(icon_697adbc8b7e872ec06b4adb8e40ed2c6);
+            
+    
+            var marker_363ea8b448868a3e425872aa3bd0dbcd = L.marker(
+                [38.7151744, -9.1507073],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_eb427993632576110d07a9d15095ccfa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_610bef71f27159f937e68bcb83a44446 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d83169e9aabb00b396cf9662d6544be6 = $(`<div id="html_d83169e9aabb00b396cf9662d6544be6" style="width: 100.0%; height: 100.0%;">         <h4>BAR 106</h4>         <p>         <b>Address: </b> 96 - 106, Rua de São Marçal, Mercês, Santo António, Misericórdia, Lisboa, 1200-192, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/bar106lx/?hl=en<br>         </p>         </div>`)[0];
+                popup_610bef71f27159f937e68bcb83a44446.setContent(html_d83169e9aabb00b396cf9662d6544be6);
+            
+        
+
+        marker_363ea8b448868a3e425872aa3bd0dbcd.bindPopup(popup_610bef71f27159f937e68bcb83a44446)
+        ;
+
+        
+    
+    
+            marker_363ea8b448868a3e425872aa3bd0dbcd.bindTooltip(
+                `<div>
+                     BAR 106
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_363ea8b448868a3e425872aa3bd0dbcd.setIcon(icon_eb427993632576110d07a9d15095ccfa);
+            
+    
+            var marker_f8244b6d2c47bf80bb7fdb7e80c6d4d4 = L.marker(
+                [38.7148612, -9.1505072],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_1b9d4c49e128fa74b3e5797edf82a894 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bf1014250fa26eef4e1a2a770233f3ca = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6b7cbf176c5989fe6baf7d41158405a0 = $(`<div id="html_6b7cbf176c5989fe6baf7d41158405a0" style="width: 100.0%; height: 100.0%;">         <h4>SHELTER</h4>         <p>         <b>Address: </b> 43, Rua da Palmeira, Mercês, Misericórdia, Lisboa, 1200-313, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.shelterbarlisboa.com/<br>         </p>         </div>`)[0];
+                popup_bf1014250fa26eef4e1a2a770233f3ca.setContent(html_6b7cbf176c5989fe6baf7d41158405a0);
+            
+        
+
+        marker_f8244b6d2c47bf80bb7fdb7e80c6d4d4.bindPopup(popup_bf1014250fa26eef4e1a2a770233f3ca)
+        ;
+
+        
+    
+    
+            marker_f8244b6d2c47bf80bb7fdb7e80c6d4d4.bindTooltip(
+                `<div>
+                     SHELTER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f8244b6d2c47bf80bb7fdb7e80c6d4d4.setIcon(icon_1b9d4c49e128fa74b3e5797edf82a894);
+            
+    
+            var marker_ed14a5478e91ebcf6c72dae05a7a01cf = L.marker(
+                [38.7107197, -9.1394885],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_54f5c16d95dad2a4945eb0975c80ae25 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6363841d145c3178830c9a0679c1357d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_da9bd9a2d867ba1eaa7c358ce9cbfa7d = $(`<div id="html_da9bd9a2d867ba1eaa7c358ce9cbfa7d" style="width: 100.0%; height: 100.0%;">         <h4>ENTRETANTO ROOFTOP</h4>         <p>         <b>Address: </b> Hotel do Chiado, 114, Rua Nova do Almada, Chiado, Santa Maria Maior, Madalena, Lisboa, 1200-290, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.hoteldochiado.pt/<br>         </p>         </div>`)[0];
+                popup_6363841d145c3178830c9a0679c1357d.setContent(html_da9bd9a2d867ba1eaa7c358ce9cbfa7d);
+            
+        
+
+        marker_ed14a5478e91ebcf6c72dae05a7a01cf.bindPopup(popup_6363841d145c3178830c9a0679c1357d)
+        ;
+
+        
+    
+    
+            marker_ed14a5478e91ebcf6c72dae05a7a01cf.bindTooltip(
+                `<div>
+                     ENTRETANTO ROOFTOP
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed14a5478e91ebcf6c72dae05a7a01cf.setIcon(icon_54f5c16d95dad2a4945eb0975c80ae25);
+            
+    
+            var marker_86f40fa02904c13bdefb92ddb3b365c4 = L.marker(
+                [38.7118961, -9.1445422],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_1767f12080922ff371734f36fe7a51fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7b10946c67233fe90aa0dd3b8c796ff7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_29e3d0fbe6e16d8448980db80bcf906e = $(`<div id="html_29e3d0fbe6e16d8448980db80bcf906e" style="width: 100.0%; height: 100.0%;">         <h4>SIDE BAR</h4>         <p>         <b>Address: </b> Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200-048, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/sidebar_bairroalto/?hl=en<br>         </p>         </div>`)[0];
+                popup_7b10946c67233fe90aa0dd3b8c796ff7.setContent(html_29e3d0fbe6e16d8448980db80bcf906e);
+            
+        
+
+        marker_86f40fa02904c13bdefb92ddb3b365c4.bindPopup(popup_7b10946c67233fe90aa0dd3b8c796ff7)
+        ;
+
+        
+    
+    
+            marker_86f40fa02904c13bdefb92ddb3b365c4.bindTooltip(
+                `<div>
+                     SIDE BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86f40fa02904c13bdefb92ddb3b365c4.setIcon(icon_1767f12080922ff371734f36fe7a51fa);
+            
+    
+            var marker_f8d8dee201211245ae1920a08c2d7dab = L.marker(
+                [38.7142437, -9.1461183],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_d8062b2f72a1ccd1b3f0837194e6742c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a4b0fa0c777cd3709f986396512c73f3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4eea3d25957243fff60cf255e28ff35a = $(`<div id="html_4eea3d25957243fff60cf255e28ff35a" style="width: 100.0%; height: 100.0%;">         <h4>XXL</h4>         <p>         <b>Address: </b> Calçada do Tijolo, Bairro Alto, Misericórdia, Lisboa, 1200-407, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/xxllisbon/?hl=en<br>         </p>         </div>`)[0];
+                popup_a4b0fa0c777cd3709f986396512c73f3.setContent(html_4eea3d25957243fff60cf255e28ff35a);
+            
+        
+
+        marker_f8d8dee201211245ae1920a08c2d7dab.bindPopup(popup_a4b0fa0c777cd3709f986396512c73f3)
+        ;
+
+        
+    
+    
+            marker_f8d8dee201211245ae1920a08c2d7dab.bindTooltip(
+                `<div>
+                     XXL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f8d8dee201211245ae1920a08c2d7dab.setIcon(icon_d8062b2f72a1ccd1b3f0837194e6742c);
+            
+    
+            var marker_3abb56c3401262bbf9f621f45b4220a8 = L.marker(
+                [38.7115849, -9.1451568],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_eabe66ee48dd170dfbb96287c8759e7b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "fa-bath",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0d74a9ba47134eb817de6123730e25dd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f75fa11ab228eb9e1e485181d33eb804 = $(`<div id="html_f75fa11ab228eb9e1e485181d33eb804" style="width: 100.0%; height: 100.0%;">         <h4>TROMBETA BATH</h4>         <p>         <b>Address: </b> Trombeta Bath (men only), 1C, Rua do Trombeta, Bairro Alto, Misericórdia, Lisboa, 1200-471, Portugal<br>         </p>         <p>         <b>Category: </b> sauna<br>         </p>         <p>         <b>Site: </b> https://www.trombetabath.com/<br>         </p>         </div>`)[0];
+                popup_0d74a9ba47134eb817de6123730e25dd.setContent(html_f75fa11ab228eb9e1e485181d33eb804);
+            
+        
+
+        marker_3abb56c3401262bbf9f621f45b4220a8.bindPopup(popup_0d74a9ba47134eb817de6123730e25dd)
+        ;
+
+        
+    
+    
+            marker_3abb56c3401262bbf9f621f45b4220a8.bindTooltip(
+                `<div>
+                     TROMBETA BATH
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3abb56c3401262bbf9f621f45b4220a8.setIcon(icon_eabe66ee48dd170dfbb96287c8759e7b);
+            
+    
+            var marker_b6d335bdb6adc721aa6335d87410627d = L.marker(
+                [38.7259314, -9.144917],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_906c23dca5adbab88ff502f7f8e7cbb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "fa-bath",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c912f25f158927591f0c060b437129f5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_61b337a63ecf6e7c89929e80d0169c20 = $(`<div id="html_61b337a63ecf6e7c89929e80d0169c20" style="width: 100.0%; height: 100.0%;">         <h4>SAUNAPOLO 56</h4>         <p>         <b>Address: </b> Rua Luciano Cordeiro, Bairro Camões, Santo António, Lisboa, 1150-217, Portugal<br>         </p>         <p>         <b>Category: </b> sauna<br>         </p>         <p>         <b>Site: </b> https://www.saunapolo56.pt/<br>         </p>         </div>`)[0];
+                popup_c912f25f158927591f0c060b437129f5.setContent(html_61b337a63ecf6e7c89929e80d0169c20);
+            
+        
+
+        marker_b6d335bdb6adc721aa6335d87410627d.bindPopup(popup_c912f25f158927591f0c060b437129f5)
+        ;
+
+        
+    
+    
+            marker_b6d335bdb6adc721aa6335d87410627d.bindTooltip(
+                `<div>
+                     SAUNAPOLO 56
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b6d335bdb6adc721aa6335d87410627d.setIcon(icon_906c23dca5adbab88ff502f7f8e7cbb4);
+            
+    
+            var marker_2ead485a3d05d0388bc8c9d0b76440f0 = L.marker(
+                [38.7191952, -9.1428501],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_37b2465877c0aedbfd29222b2a27b15b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "fa-bath",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_94333512ec80c8adee7a6511115c68ef = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_78d8c5db779f5b0cdeb83b8e556a4651 = $(`<div id="html_78d8c5db779f5b0cdeb83b8e556a4651" style="width: 100.0%; height: 100.0%;">         <h4>OLISSIPO BATH</h4>         <p>         <b>Address: </b> 5, Rua do Telhal, São José, Santo António, Madalena, Lisboa, 1150-149, Portugal<br>         </p>         <p>         <b>Category: </b> sauna<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/olissiposauna/?hl=en<br>         </p>         </div>`)[0];
+                popup_94333512ec80c8adee7a6511115c68ef.setContent(html_78d8c5db779f5b0cdeb83b8e556a4651);
+            
+        
+
+        marker_2ead485a3d05d0388bc8c9d0b76440f0.bindPopup(popup_94333512ec80c8adee7a6511115c68ef)
+        ;
+
+        
+    
+    
+            marker_2ead485a3d05d0388bc8c9d0b76440f0.bindTooltip(
+                `<div>
+                     OLISSIPO BATH
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2ead485a3d05d0388bc8c9d0b76440f0.setIcon(icon_37b2465877c0aedbfd29222b2a27b15b);
+            
+    
+            var marker_b7ee28cd4b10ad3bd72d9d10f51251b2 = L.marker(
+                [38.7131474, -9.1510302],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_93cf98dbf3487c644039a9d6c4ad6e01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_67fa2203da7244c300d1be78ce21fbea = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2efd9ffd06b92c211bbdb787f257d61a = $(`<div id="html_2efd9ffd06b92c211bbdb787f257d61a" style="width: 100.0%; height: 100.0%;">         <h4>BISTRO EDELWEISS</h4>         <p>         <b>Address: </b> Edelweiss, 2, Rua de São Marçal, Mercês, Santo António, Misericórdia, Lisboa, 1200-421, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://bistroedelweiss.eatbu.com/?lang=pt<br>         </p>         </div>`)[0];
+                popup_67fa2203da7244c300d1be78ce21fbea.setContent(html_2efd9ffd06b92c211bbdb787f257d61a);
+            
+        
+
+        marker_b7ee28cd4b10ad3bd72d9d10f51251b2.bindPopup(popup_67fa2203da7244c300d1be78ce21fbea)
+        ;
+
+        
+    
+    
+            marker_b7ee28cd4b10ad3bd72d9d10f51251b2.bindTooltip(
+                `<div>
+                     BISTRO EDELWEISS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b7ee28cd4b10ad3bd72d9d10f51251b2.setIcon(icon_93cf98dbf3487c644039a9d6c4ad6e01);
+            
+    
+            var marker_c5e93acb28b4ec0d8c17542b0f8515a3 = L.marker(
+                [38.7097868, -9.1516671],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_bf4240d5435aec5748a9e9a881d7aaff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7d33a19a10e833ee0753201d58279c50 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_58afb4af31e694b34b9b3e1e2c6b9790 = $(`<div id="html_58afb4af31e694b34b9b3e1e2c6b9790" style="width: 100.0%; height: 100.0%;">         <h4>DR. BERNARD</h4>         <p>         <b>Address: </b> Dr. Bernard Boavida, 119, Rua do Poço dos Negros, São Bento, Misericórdia, Lisboa, 1200-336, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/boavidadrbernard/?hl=en<br>         </p>         </div>`)[0];
+                popup_7d33a19a10e833ee0753201d58279c50.setContent(html_58afb4af31e694b34b9b3e1e2c6b9790);
+            
+        
+
+        marker_c5e93acb28b4ec0d8c17542b0f8515a3.bindPopup(popup_7d33a19a10e833ee0753201d58279c50)
+        ;
+
+        
+    
+    
+            marker_c5e93acb28b4ec0d8c17542b0f8515a3.bindTooltip(
+                `<div>
+                     DR. BERNARD
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c5e93acb28b4ec0d8c17542b0f8515a3.setIcon(icon_bf4240d5435aec5748a9e9a881d7aaff);
+            
+    
+            var marker_c7833c27db2626565d3bdfaa19362c3d = L.marker(
+                [38.7252609, -9.1489343],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_183ed3ddd26c4c779a49f56c1c06a27b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e123e239cf6957a17ae787fbb55427eb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_61085c5ee0d6a487ff9fe4ccb6af8383 = $(`<div id="html_61085c5ee0d6a487ff9fe4ccb6af8383" style="width: 100.0%; height: 100.0%;">         <h4>GLITTER’S GALLERY</h4>         <p>         <b>Address: </b> Avenida Duque de Loulé, Coração de Jesus, Santo António, Lisboa, 1250-162, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/glitters_lisboa/?hl=en<br>         </p>         </div>`)[0];
+                popup_e123e239cf6957a17ae787fbb55427eb.setContent(html_61085c5ee0d6a487ff9fe4ccb6af8383);
+            
+        
+
+        marker_c7833c27db2626565d3bdfaa19362c3d.bindPopup(popup_e123e239cf6957a17ae787fbb55427eb)
+        ;
+
+        
+    
+    
+            marker_c7833c27db2626565d3bdfaa19362c3d.bindTooltip(
+                `<div>
+                     GLITTER’S GALLERY
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c7833c27db2626565d3bdfaa19362c3d.setIcon(icon_183ed3ddd26c4c779a49f56c1c06a27b);
+            
+    
+            var marker_9745920867c705bbcad91505d79e58b3 = L.marker(
+                [38.7118961, -9.1445422],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_befbb18da77fc498f85f618363806a3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_670b020f45d6ce196419e995c91d9017 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2e9503d4f5c4e797a2e2cde3e650bddf = $(`<div id="html_2e9503d4f5c4e797a2e2cde3e650bddf" style="width: 100.0%; height: 100.0%;">         <h4>MANNY’S PLACE</h4>         <p>         <b>Address: </b> Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200-048, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://www.mannysplacelisbon.com/<br>         </p>         </div>`)[0];
+                popup_670b020f45d6ce196419e995c91d9017.setContent(html_2e9503d4f5c4e797a2e2cde3e650bddf);
+            
+        
+
+        marker_9745920867c705bbcad91505d79e58b3.bindPopup(popup_670b020f45d6ce196419e995c91d9017)
+        ;
+
+        
+    
+    
+            marker_9745920867c705bbcad91505d79e58b3.bindTooltip(
+                `<div>
+                     MANNY’S PLACE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9745920867c705bbcad91505d79e58b3.setIcon(icon_befbb18da77fc498f85f618363806a3a);
+            
+    
+            var marker_37bec1f70fe476df4c8b267c551a7b39 = L.marker(
+                [38.718434, -9.1453769],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_cdfbfb20a9e4283bddcd53fb8e1400a1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_87320cdbfa79642ffa93b04298fd61a3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7807bf3880795949c6a67d42063dcecd = $(`<div id="html_7807bf3880795949c6a67d42063dcecd" style="width: 100.0%; height: 100.0%;">         <h4>MAXIME RESTAURANTE BAR</h4>         <p>         <b>Address: </b> Maxime Hotel, 58, Praça da Alegria, São José, Santo António, Madalena, Lisboa, 1250-004, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://www.maximerestaurantelisboa.com/<br>         </p>         </div>`)[0];
+                popup_87320cdbfa79642ffa93b04298fd61a3.setContent(html_7807bf3880795949c6a67d42063dcecd);
+            
+        
+
+        marker_37bec1f70fe476df4c8b267c551a7b39.bindPopup(popup_87320cdbfa79642ffa93b04298fd61a3)
+        ;
+
+        
+    
+    
+            marker_37bec1f70fe476df4c8b267c551a7b39.bindTooltip(
+                `<div>
+                     MAXIME RESTAURANTE BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_37bec1f70fe476df4c8b267c551a7b39.setIcon(icon_cdfbfb20a9e4283bddcd53fb8e1400a1);
+            
+    
+            var marker_dca740963aa0a374a5de258ebcc72bfc = L.marker(
+                [38.7170987, -9.1446908],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_fb0ecc7170aca890bfec49cc8038c370 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6e22219f51478cbdbab8de3254f1b01b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_463221fcbe5b92b2f600a4d736d4f18a = $(`<div id="html_463221fcbe5b92b2f600a4d736d4f18a" style="width: 100.0%; height: 100.0%;">         <h4>QUERMESSE</h4>         <p>         <b>Address: </b> Quermesse, 85, Rua da Glória, São José, Santo António, Madalena, Lisboa, 1250-115, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/quermesse.restaurante/?hl=en<br>         </p>         </div>`)[0];
+                popup_6e22219f51478cbdbab8de3254f1b01b.setContent(html_463221fcbe5b92b2f600a4d736d4f18a);
+            
+        
+
+        marker_dca740963aa0a374a5de258ebcc72bfc.bindPopup(popup_6e22219f51478cbdbab8de3254f1b01b)
+        ;
+
+        
+    
+    
+            marker_dca740963aa0a374a5de258ebcc72bfc.bindTooltip(
+                `<div>
+                     QUERMESSE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dca740963aa0a374a5de258ebcc72bfc.setIcon(icon_fb0ecc7170aca890bfec49cc8038c370);
+            
+    
+            var marker_31ce84bd22b454c4e07ea6e2ccd64991 = L.marker(
+                [38.7117173, -9.1451152],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_eb9ad98baaca72db1a96ca162f881e6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-cutlery",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fb1d8de1d5e7f4354ad9254360d86275 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7fad616810208b86a5a5b4e510411aaf = $(`<div id="html_7fad616810208b86a5a5b4e510411aaf" style="width: 100.0%; height: 100.0%;">         <h4>TANTURA MEDITERRANEAN CUISINE</h4>         <p>         <b>Address: </b> Tantura, 1D, Rua do Trombeta, Bairro Alto, Misericórdia, Lisboa, 1200-471, Portugal<br>         </p>         <p>         <b>Category: </b> restaurant<br>         </p>         <p>         <b>Site: </b> https://tantura.pt/<br>         </p>         </div>`)[0];
+                popup_fb1d8de1d5e7f4354ad9254360d86275.setContent(html_7fad616810208b86a5a5b4e510411aaf);
+            
+        
+
+        marker_31ce84bd22b454c4e07ea6e2ccd64991.bindPopup(popup_fb1d8de1d5e7f4354ad9254360d86275)
+        ;
+
+        
+    
+    
+            marker_31ce84bd22b454c4e07ea6e2ccd64991.bindTooltip(
+                `<div>
+                     TANTURA MEDITERRANEAN CUISINE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_31ce84bd22b454c4e07ea6e2ccd64991.setIcon(icon_eb9ad98baaca72db1a96ca162f881e6b);
+            
+    
+            var marker_3b5a9ffd2fc4fc961f200e193b579dea = L.marker(
+                [38.7107197, -9.1394885],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_e8c8445d6299e666a936f7b4ee4efafa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_87b43cbc76c0aadda62daa3e4874dc4f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_728f4bed874b4c2d1d4740fa477aea07 = $(`<div id="html_728f4bed874b4c2d1d4740fa477aea07" style="width: 100.0%; height: 100.0%;">         <h4>HOTEL DO CHIADO</h4>         <p>         <b>Address: </b> Hotel do Chiado, 114, Rua Nova do Almada, Chiado, Santa Maria Maior, Madalena, Lisboa, 1200-290, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.hoteldochiado.pt/<br>         </p>         </div>`)[0];
+                popup_87b43cbc76c0aadda62daa3e4874dc4f.setContent(html_728f4bed874b4c2d1d4740fa477aea07);
+            
+        
+
+        marker_3b5a9ffd2fc4fc961f200e193b579dea.bindPopup(popup_87b43cbc76c0aadda62daa3e4874dc4f)
+        ;
+
+        
+    
+    
+            marker_3b5a9ffd2fc4fc961f200e193b579dea.bindTooltip(
+                `<div>
+                     HOTEL DO CHIADO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b5a9ffd2fc4fc961f200e193b579dea.setIcon(icon_e8c8445d6299e666a936f7b4ee4efafa);
+            
+    
+            var marker_ba337cb0a35d18b064dbf45c2a3ec85a = L.marker(
+                [38.7209863, -9.1524216],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_846544879deb0c1b1a67bde4276f1f09 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7f8160a9aeb7bb831f2603bfd5e5b951 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_470de60aa9d653c2f8cd4d52f48d319c = $(`<div id="html_470de60aa9d653c2f8cd4d52f48d319c" style="width: 100.0%; height: 100.0%;">         <h4>MAMA SHELTER LISBOA</h4>         <p>         <b>Address: </b> Mama Shelter Lisboa, Rua Alexandre Herculano, São Mamede, Santo António, Lisboa, 1250-270, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://pt.mamashelter.com/lisboa/<br>         </p>         </div>`)[0];
+                popup_7f8160a9aeb7bb831f2603bfd5e5b951.setContent(html_470de60aa9d653c2f8cd4d52f48d319c);
+            
+        
+
+        marker_ba337cb0a35d18b064dbf45c2a3ec85a.bindPopup(popup_7f8160a9aeb7bb831f2603bfd5e5b951)
+        ;
+
+        
+    
+    
+            marker_ba337cb0a35d18b064dbf45c2a3ec85a.bindTooltip(
+                `<div>
+                     MAMA SHELTER LISBOA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ba337cb0a35d18b064dbf45c2a3ec85a.setIcon(icon_846544879deb0c1b1a67bde4276f1f09);
+            
+    
+            var marker_f7698e9f794bee3327547b7f09f635f4 = L.marker(
+                [38.698324, -9.1868891],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_963052fccbf7d3014797f589fec8bfe6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42847888f8ed963cf595798b29450f71 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_fafdff0d161d3cb4de552d45a2b25c12 = $(`<div id="html_fafdff0d161d3cb4de552d45a2b25c12" style="width: 100.0%; height: 100.0%;">         <h4>HYATT REGENCY LISBOA</h4>         <p>         <b>Address: </b> Hotel Hyatt Regency, 63, Rua da Junqueira, Alcântara, Lisboa, 1300-343, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.hyatt.com/hyatt-regency/pt-PT/lishr-hyatt-regency-lisbon<br>         </p>         </div>`)[0];
+                popup_42847888f8ed963cf595798b29450f71.setContent(html_fafdff0d161d3cb4de552d45a2b25c12);
+            
+        
+
+        marker_f7698e9f794bee3327547b7f09f635f4.bindPopup(popup_42847888f8ed963cf595798b29450f71)
+        ;
+
+        
+    
+    
+            marker_f7698e9f794bee3327547b7f09f635f4.bindTooltip(
+                `<div>
+                     HYATT REGENCY LISBOA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f7698e9f794bee3327547b7f09f635f4.setIcon(icon_963052fccbf7d3014797f589fec8bfe6);
+            
+    
+            var marker_62c10f22084f44c3198c804e6974068f = L.marker(
+                [38.7114185, -9.1475878],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_6b412ce74acb2c1b401fd0f3bffb2408 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_301777dd6fc01ae4f4408c780be5ae31 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_20bca2161fcd53120b9a7b39872189ce = $(`<div id="html_20bca2161fcd53120b9a7b39872189ce" style="width: 100.0%; height: 100.0%;">         <h4>THE LATE BIRDS LISBON</h4>         <p>         <b>Address: </b> Travessa André Valente, Santa Catarina, Misericórdia, Lisboa, 1200-236, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.thelatebirdslisbon.com/<br>         </p>         </div>`)[0];
+                popup_301777dd6fc01ae4f4408c780be5ae31.setContent(html_20bca2161fcd53120b9a7b39872189ce);
+            
+        
+
+        marker_62c10f22084f44c3198c804e6974068f.bindPopup(popup_301777dd6fc01ae4f4408c780be5ae31)
+        ;
+
+        
+    
+    
+            marker_62c10f22084f44c3198c804e6974068f.bindTooltip(
+                `<div>
+                     THE LATE BIRDS LISBON
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62c10f22084f44c3198c804e6974068f.setIcon(icon_6b412ce74acb2c1b401fd0f3bffb2408);
+            
+    
+            var marker_cdd0af3b425b717c3f1661034b217acc = L.marker(
+                [38.7111648, -9.1383122],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_d56b4a7fe097301776759ce13bb62ec7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8d6070e3e124f12037e3f2c97ca7e11b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_70f410a044c5e84c3c1c3449d1be7962 = $(`<div id="html_70f410a044c5e84c3c1c3449d1be7962" style="width: 100.0%; height: 100.0%;">         <h4>BROWNS DOWNTOWN HOTEL</h4>         <p>         <b>Address: </b> Rua dos Sapateiros, Santa Maria Maior, Madalena, Lisboa, 1100-619, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.brownshotelgroup.com/en/browns-downtown/<br>         </p>         </div>`)[0];
+                popup_8d6070e3e124f12037e3f2c97ca7e11b.setContent(html_70f410a044c5e84c3c1c3449d1be7962);
+            
+        
+
+        marker_cdd0af3b425b717c3f1661034b217acc.bindPopup(popup_8d6070e3e124f12037e3f2c97ca7e11b)
+        ;
+
+        
+    
+    
+            marker_cdd0af3b425b717c3f1661034b217acc.bindTooltip(
+                `<div>
+                     BROWNS DOWNTOWN HOTEL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cdd0af3b425b717c3f1661034b217acc.setIcon(icon_d56b4a7fe097301776759ce13bb62ec7);
+            
+    
+            var marker_4e0b565df1325f418f051dd18b50d4e2 = L.marker(
+                [38.7112659, -9.1459416],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_d1e7f49a4d3abfb40a62110315193bf9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c50974079724419de782033dafecc89f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9dbf158890368bcd63964359b439bb0c = $(`<div id="html_9dbf158890368bcd63964359b439bb0c" style="width: 100.0%; height: 100.0%;">         <h4>STAY INN LISBON HOSTEL</h4>         <p>         <b>Address: </b> 19, Rua Luz Soriano, Bairro Alto, Misericórdia, Lisboa, 1200-247, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://stayinnhostel.hotelsoflisbon.com/en/<br>         </p>         </div>`)[0];
+                popup_c50974079724419de782033dafecc89f.setContent(html_9dbf158890368bcd63964359b439bb0c);
+            
+        
+
+        marker_4e0b565df1325f418f051dd18b50d4e2.bindPopup(popup_c50974079724419de782033dafecc89f)
+        ;
+
+        
+    
+    
+            marker_4e0b565df1325f418f051dd18b50d4e2.bindTooltip(
+                `<div>
+                     STAY INN LISBON HOSTEL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4e0b565df1325f418f051dd18b50d4e2.setIcon(icon_d1e7f49a4d3abfb40a62110315193bf9);
+            
+    
+            var marker_2d903311a51a97be28f0ecff42c55802 = L.marker(
+                [38.7102737, -9.1432838],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_ce499e73ba949ba68c4491efef4f7462 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f2bbc370e482cf4472fa4d0fc9bfe494 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7e9ea7e42daa1c6af4cf9e2311c5c7d7 = $(`<div id="html_7e9ea7e42daa1c6af4cf9e2311c5c7d7" style="width: 100.0%; height: 100.0%;">         <h4>BAIRRO ALTO HOTEL</h4>         <p>         <b>Address: </b> Bairro Alto Hotel, 2, Praça Luís de Camões, Encarnação, Misericórdia, Lisboa, 1200-243, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.bairroaltohotel.com/pt/<br>         </p>         </div>`)[0];
+                popup_f2bbc370e482cf4472fa4d0fc9bfe494.setContent(html_7e9ea7e42daa1c6af4cf9e2311c5c7d7);
+            
+        
+
+        marker_2d903311a51a97be28f0ecff42c55802.bindPopup(popup_f2bbc370e482cf4472fa4d0fc9bfe494)
+        ;
+
+        
+    
+    
+            marker_2d903311a51a97be28f0ecff42c55802.bindTooltip(
+                `<div>
+                     BAIRRO ALTO HOTEL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2d903311a51a97be28f0ecff42c55802.setIcon(icon_ce499e73ba949ba68c4491efef4f7462);
+            
+    
+            var marker_7b2e4e7a339b2bead1cfeeeb04c0f7ae = L.marker(
+                [38.7118961, -9.1445422],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_40b7b8e3fa6cc8d76ad9c521758e3060 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_35e5f55417a2c704181732eb026f75ed = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1f271ebd7634451f74763ee6a21f127d = $(`<div id="html_1f271ebd7634451f74763ee6a21f127d" style="width: 100.0%; height: 100.0%;">         <h4>BAIRRU'S BODEGA</h4>         <p>         <b>Address: </b> Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200-048, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.facebook.com/people/Bairrus-Bodega/100066808600258/#<br>         </p>         </div>`)[0];
+                popup_35e5f55417a2c704181732eb026f75ed.setContent(html_1f271ebd7634451f74763ee6a21f127d);
+            
+        
+
+        marker_7b2e4e7a339b2bead1cfeeeb04c0f7ae.bindPopup(popup_35e5f55417a2c704181732eb026f75ed)
+        ;
+
+        
+    
+    
+            marker_7b2e4e7a339b2bead1cfeeeb04c0f7ae.bindTooltip(
+                `<div>
+                     BAIRRU'S BODEGA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b2e4e7a339b2bead1cfeeeb04c0f7ae.setIcon(icon_40b7b8e3fa6cc8d76ad9c521758e3060);
+            
+    
+            var marker_0a7d21fc12583adcd94bfc27c6a85a54 = L.marker(
+                [38.7117647, -9.1445614],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_f2a844dbb9f14b4f73023b899c69b674 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "film",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2048f54e3606878f5e3de8881812a278 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_246c046fff2405a0e1a296583bba43fe = $(`<div id="html_246c046fff2405a0e1a296583bba43fe" style="width: 100.0%; height: 100.0%;">         <h4>ZÉ DOS BOIS</h4>         <p>         <b>Address: </b> Zé dos Bois, 59, Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200-049, Portugal<br>         </p>         <p>         <b>Category: </b> cultural space<br>         </p>         <p>         <b>Site: </b> https://zedosbois.org/<br>         </p>         </div>`)[0];
+                popup_2048f54e3606878f5e3de8881812a278.setContent(html_246c046fff2405a0e1a296583bba43fe);
+            
+        
+
+        marker_0a7d21fc12583adcd94bfc27c6a85a54.bindPopup(popup_2048f54e3606878f5e3de8881812a278)
+        ;
+
+        
+    
+    
+            marker_0a7d21fc12583adcd94bfc27c6a85a54.bindTooltip(
+                `<div>
+                     ZÉ DOS BOIS
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0a7d21fc12583adcd94bfc27c6a85a54.setIcon(icon_f2a844dbb9f14b4f73023b899c69b674);
+            
+    
+            var marker_62d5c5ada5742a1acaf5eb4bae6f6b3d = L.marker(
+                [38.7291658, -9.1441198],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_70a68e93cfe3b506326aa86e52faf2ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "fa-bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d411fc7a8df5636ae89cc096f5702427 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b82898a4d313cf78f121b756d527beba = $(`<div id="html_b82898a4d313cf78f121b756d527beba" style="width: 100.0%; height: 100.0%;">         <h4>MOXY LISBON CITY</h4>         <p>         <b>Address: </b> Moxy Lisbon City, 2, Avenida Duque de Loulé, Saldanha, Arroios, Lisboa, 1050-090, Portugal<br>         </p>         <p>         <b>Category: </b> accommodation<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/moxylisboncity/?hl=en<br>         </p>         </div>`)[0];
+                popup_d411fc7a8df5636ae89cc096f5702427.setContent(html_b82898a4d313cf78f121b756d527beba);
+            
+        
+
+        marker_62d5c5ada5742a1acaf5eb4bae6f6b3d.bindPopup(popup_d411fc7a8df5636ae89cc096f5702427)
+        ;
+
+        
+    
+    
+            marker_62d5c5ada5742a1acaf5eb4bae6f6b3d.bindTooltip(
+                `<div>
+                     MOXY LISBON CITY
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62d5c5ada5742a1acaf5eb4bae6f6b3d.setIcon(icon_70a68e93cfe3b506326aa86e52faf2ef);
+            
+    
+            var marker_ea221d573e954b538030c7d68e1f94ce = L.marker(
+                [38.7845054, -9.3459438],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_5aafb1b5efdd89ebcb7143aca6cf1f59 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d858d5c0064210bb328614d9dc6770b6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_55526a2cf1e686e3acca3a1f363df382 = $(`<div id="html_55526a2cf1e686e3acca3a1f363df382" style="width: 100.0%; height: 100.0%;">         <h4>MARGEM SUL BAR</h4>         <p>         <b>Address: </b> 11, Rua da Liberdade, São Carlos, Mem Martins, Algueirão-Mem Martins, Sintra, Lisboa, 2725-358, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/margem_sul_club_bar/?hl=en<br>         </p>         </div>`)[0];
+                popup_d858d5c0064210bb328614d9dc6770b6.setContent(html_55526a2cf1e686e3acca3a1f363df382);
+            
+        
+
+        marker_ea221d573e954b538030c7d68e1f94ce.bindPopup(popup_d858d5c0064210bb328614d9dc6770b6)
+        ;
+
+        
+    
+    
+            marker_ea221d573e954b538030c7d68e1f94ce.bindTooltip(
+                `<div>
+                     MARGEM SUL BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ea221d573e954b538030c7d68e1f94ce.setIcon(icon_5aafb1b5efdd89ebcb7143aca6cf1f59);
+            
+    
+            var marker_5eed4012fa883d2d6833dbcffad9c723 = L.marker(
+                [38.7157774, -9.1595563],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_e209ce516f7adf2fde97e977caa9fed0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "film",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e045ecc3cb158ddb2742d368ac5d7e5c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1ac98c86c13dc4fed23caa83f228e6d8 = $(`<div id="html_1ac98c86c13dc4fed23caa83f228e6d8" style="width: 100.0%; height: 100.0%;">         <h4>CASA JARDIM DA ESTRELA</h4>         <p>         <b>Address: </b> Jardim da Estrela, Rua de São Jorge, Santa Isabel, Campo de Ourique, Lisboa, 1269-093, Portugal<br>         </p>         <p>         <b>Category: </b> cultural space<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/casadojardimdaestrela/?hl=en<br>         </p>         </div>`)[0];
+                popup_e045ecc3cb158ddb2742d368ac5d7e5c.setContent(html_1ac98c86c13dc4fed23caa83f228e6d8);
+            
+        
+
+        marker_5eed4012fa883d2d6833dbcffad9c723.bindPopup(popup_e045ecc3cb158ddb2742d368ac5d7e5c)
+        ;
+
+        
+    
+    
+            marker_5eed4012fa883d2d6833dbcffad9c723.bindTooltip(
+                `<div>
+                     CASA JARDIM DA ESTRELA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5eed4012fa883d2d6833dbcffad9c723.setIcon(icon_e209ce516f7adf2fde97e977caa9fed0);
+            
+    
+            var marker_314af3edfd190b449ffeff918938f00c = L.marker(
+                [38.7111633, -9.1444355],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_341ec5e1c69a067756311d07b3f2c636 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fe1341f9b0db7adbf31a7e4f16a51d79 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f55aa56f88d3687def2522fa1935722e = $(`<div id="html_f55aa56f88d3687def2522fa1935722e" style="width: 100.0%; height: 100.0%;">         <h4>MARIA CAXUCA</h4>         <p>         <b>Address: </b> Maria Caxuxa, 6-12, Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200-048, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/mariacaxuxabar/?hl=en<br>         </p>         </div>`)[0];
+                popup_fe1341f9b0db7adbf31a7e4f16a51d79.setContent(html_f55aa56f88d3687def2522fa1935722e);
+            
+        
+
+        marker_314af3edfd190b449ffeff918938f00c.bindPopup(popup_fe1341f9b0db7adbf31a7e4f16a51d79)
+        ;
+
+        
+    
+    
+            marker_314af3edfd190b449ffeff918938f00c.bindTooltip(
+                `<div>
+                     MARIA CAXUCA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_314af3edfd190b449ffeff918938f00c.setIcon(icon_341ec5e1c69a067756311d07b3f2c636);
+            
+    
+            var marker_30cb5b6ccf842239c1ca3861912f35f7 = L.marker(
+                [38.7114821, -9.1444344],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_1229f88545bda1eca9337a9e4709cf5d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4efb2622531a355d1a13ecbc367ceb4c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_babed0aad3058ad62459fcbf33394267 = $(`<div id="html_babed0aad3058ad62459fcbf33394267" style="width: 100.0%; height: 100.0%;">         <h4>BAR CLUBE DA ESQUINA</h4>         <p>         <b>Address: </b> Clube da Esquina, 30, Rua da Barroca, Bairro Alto, Misericórdia, Lisboa, 1200, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/clubedaesquina/?hl=en<br>         </p>         </div>`)[0];
+                popup_4efb2622531a355d1a13ecbc367ceb4c.setContent(html_babed0aad3058ad62459fcbf33394267);
+            
+        
+
+        marker_30cb5b6ccf842239c1ca3861912f35f7.bindPopup(popup_4efb2622531a355d1a13ecbc367ceb4c)
+        ;
+
+        
+    
+    
+            marker_30cb5b6ccf842239c1ca3861912f35f7.bindTooltip(
+                `<div>
+                     BAR CLUBE DA ESQUINA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_30cb5b6ccf842239c1ca3861912f35f7.setIcon(icon_1229f88545bda1eca9337a9e4709cf5d);
+            
+    
+            var marker_e7f65921a765b6fb4c0101efe930a5e9 = L.marker(
+                [38.7144047, -9.1497689],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_548089fe1ac6302276067c775e942033 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-shopping-cart",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cda9a69dc1141902b3494946fe81d676 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6ee2a5d3b0cbf79c6625d1da708cfbf2 = $(`<div id="html_6ee2a5d3b0cbf79c6625d1da708cfbf2" style="width: 100.0%; height: 100.0%;">         <h4>MR. WOOF</h4>         <p>         <b>Address: </b> Rua Ruben A. Leitão, Mercês, Misericórdia, Lisboa, 1200-311, Portugal<br>         </p>         <p>         <b>Category: </b> store<br>         </p>         <p>         <b>Site: </b> https://www.facebook.com/Mr.Woof.Store/<br>         </p>         </div>`)[0];
+                popup_cda9a69dc1141902b3494946fe81d676.setContent(html_6ee2a5d3b0cbf79c6625d1da708cfbf2);
+            
+        
+
+        marker_e7f65921a765b6fb4c0101efe930a5e9.bindPopup(popup_cda9a69dc1141902b3494946fe81d676)
+        ;
+
+        
+    
+    
+            marker_e7f65921a765b6fb4c0101efe930a5e9.bindTooltip(
+                `<div>
+                     MR. WOOF
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e7f65921a765b6fb4c0101efe930a5e9.setIcon(icon_548089fe1ac6302276067c775e942033);
+            
+    
+            var marker_6277f0f37f7a937d1ba5576dd2d1585d = L.marker(
+                [38.7119328, -9.1429612],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_27d9abfecc5bcb15680d2779c0740f2b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-shopping-cart",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5d315030912ee94a6be20b49cf455941 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a7f2f1f637bdfe4360fca2712c5b7396 = $(`<div id="html_a7f2f1f637bdfe4360fca2712c5b7396" style="width: 100.0%; height: 100.0%;">         <h4>UP!TOWN LISBOA</h4>         <p>         <b>Address: </b> Rua da Misericórdia, Encarnação, Misericórdia, Lisboa, 1200-466, Portugal<br>         </p>         <p>         <b>Category: </b> store<br>         </p>         <p>         <b>Site: </b> https://www.facebook.com/uptownlisboa/<br>         </p>         </div>`)[0];
+                popup_5d315030912ee94a6be20b49cf455941.setContent(html_a7f2f1f637bdfe4360fca2712c5b7396);
+            
+        
+
+        marker_6277f0f37f7a937d1ba5576dd2d1585d.bindPopup(popup_5d315030912ee94a6be20b49cf455941)
+        ;
+
+        
+    
+    
+            marker_6277f0f37f7a937d1ba5576dd2d1585d.bindTooltip(
+                `<div>
+                     UP!TOWN LISBOA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6277f0f37f7a937d1ba5576dd2d1585d.setIcon(icon_27d9abfecc5bcb15680d2779c0740f2b);
+            
+    
+            var marker_1a90d8441b93fd699371601c12d23e92 = L.marker(
+                [38.7144118, -9.1217011],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_34e050086c2e2b47a97e1f1994212bca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c96d3c2e239ec62300bb682c8d8f37a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d62412d489bad61fcbbb4dede93cf10c = $(`<div id="html_d62412d489bad61fcbbb4dede93cf10c" style="width: 100.0%; height: 100.0%;">         <h4>LUX FRÁGIL</h4>         <p>         <b>Address: </b> Avenida Infante Dom Henrique, São Vicente de Fora, Graça, São Vicente, Lisboa, 1100-094, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.luxfragil.com/<br>         </p>         </div>`)[0];
+                popup_3c96d3c2e239ec62300bb682c8d8f37a.setContent(html_d62412d489bad61fcbbb4dede93cf10c);
+            
+        
+
+        marker_1a90d8441b93fd699371601c12d23e92.bindPopup(popup_3c96d3c2e239ec62300bb682c8d8f37a)
+        ;
+
+        
+    
+    
+            marker_1a90d8441b93fd699371601c12d23e92.bindTooltip(
+                `<div>
+                     LUX FRÁGIL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1a90d8441b93fd699371601c12d23e92.setIcon(icon_34e050086c2e2b47a97e1f1994212bca);
+            
+    
+            var marker_ac9b7b40710121bd8bbe520d969d1be1 = L.marker(
+                [38.7127697, -9.1450332],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_f0804b1f258616be39c6a337db9d34b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c1235d9551fdde91c5c3c098bee74e50 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d511a4a7b0f04b06c68ef55b17932258 = $(`<div id="html_d511a4a7b0f04b06c68ef55b17932258" style="width: 100.0%; height: 100.0%;">         <h4>PRIMAS BAR</h4>         <p>         <b>Address: </b> Rua da Atalaia, Bairro Alto, Misericórdia, Lisboa, 1200-043, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.facebook.com/p/Primas-Bar-100057559153694/<br>         </p>         </div>`)[0];
+                popup_c1235d9551fdde91c5c3c098bee74e50.setContent(html_d511a4a7b0f04b06c68ef55b17932258);
+            
+        
+
+        marker_ac9b7b40710121bd8bbe520d969d1be1.bindPopup(popup_c1235d9551fdde91c5c3c098bee74e50)
+        ;
+
+        
+    
+    
+            marker_ac9b7b40710121bd8bbe520d969d1be1.bindTooltip(
+                `<div>
+                     PRIMAS BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ac9b7b40710121bd8bbe520d969d1be1.setIcon(icon_f0804b1f258616be39c6a337db9d34b3);
+            
+    
+            var marker_548c9a936fab57909aadd046f64141ed = L.marker(
+                [38.7213015, -9.1318612],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_8e10d48cf0b6561657a1119f4d968b42 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "pink",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-glass",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a152c7557054e86f6230efa61e5f5fc0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_206d07250d4d6766a2f30db670176b16 = $(`<div id="html_206d07250d4d6766a2f30db670176b16" style="width: 100.0%; height: 100.0%;">         <h4>DRAMA BAR</h4>         <p>         <b>Address: </b> 75, Rua Damasceno Monteiro, Anjos, Arroios, Lisboa, 1170-251, Portugal<br>         </p>         <p>         <b>Category: </b> nightclub/bar<br>         </p>         <p>         <b>Site: </b> https://www.instagram.com/dramabar.lisboa/?hl=en<br>         </p>         </div>`)[0];
+                popup_a152c7557054e86f6230efa61e5f5fc0.setContent(html_206d07250d4d6766a2f30db670176b16);
+            
+        
+
+        marker_548c9a936fab57909aadd046f64141ed.bindPopup(popup_a152c7557054e86f6230efa61e5f5fc0)
+        ;
+
+        
+    
+    
+            marker_548c9a936fab57909aadd046f64141ed.bindTooltip(
+                `<div>
+                     DRAMA BAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_548c9a936fab57909aadd046f64141ed.setIcon(icon_8e10d48cf0b6561657a1119f4d968b42);
+            
+    
+            var marker_7b00da4c1ff4acba6cb0521378baeba0 = L.marker(
+                [38.7098067, -9.1355489],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_b7c1b5f9694e1c9a3a06ff4da683b720 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-heart-empty",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5e30eda42298644bc16bbff6d59af0dd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c786f04ed8d467f956aed51736220369 = $(`<div id="html_c786f04ed8d467f956aed51736220369" style="width: 100.0%; height: 100.0%;">         <h4>ILGA PORTUGAL</h4>         <p>         <b>Address: </b> Rua dos Fanqueiros, Santa Maria Maior, Madalena, Lisboa, 1100-350, Portugal<br>         </p>         <p>         <b>Category: </b> association<br>         </p>         <p>         <b>Site: </b> https://ilga-portugal.pt/<br>         </p>         </div>`)[0];
+                popup_5e30eda42298644bc16bbff6d59af0dd.setContent(html_c786f04ed8d467f956aed51736220369);
+            
+        
+
+        marker_7b00da4c1ff4acba6cb0521378baeba0.bindPopup(popup_5e30eda42298644bc16bbff6d59af0dd)
+        ;
+
+        
+    
+    
+            marker_7b00da4c1ff4acba6cb0521378baeba0.bindTooltip(
+                `<div>
+                     ILGA PORTUGAL
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b00da4c1ff4acba6cb0521378baeba0.setIcon(icon_b7c1b5f9694e1c9a3a06ff4da683b720);
+            
+    
+            var marker_3b1b9b30b21a9286e814c6fa7d4126bc = L.marker(
+                [38.7679587, -9.1574553],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_12dee0f3c68613d00c93105cf1ea1f79 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-heart-empty",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e4aabf62153eac3d2cc5f0fd07b41c67 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bd8a8b0f2e09b1c1532b18da0172cb31 = $(`<div id="html_bd8a8b0f2e09b1c1532b18da0172cb31" style="width: 100.0%; height: 100.0%;">         <h4>CASA QUI</h4>         <p>         <b>Address: </b> Largo das Conchas, Quinta do Lambert, Lumiar, Lisboa, 1750-155, Portugal<br>         </p>         <p>         <b>Category: </b> association<br>         </p>         <p>         <b>Site: </b> https://www.casa-qui.pt/<br>         </p>         </div>`)[0];
+                popup_e4aabf62153eac3d2cc5f0fd07b41c67.setContent(html_bd8a8b0f2e09b1c1532b18da0172cb31);
+            
+        
+
+        marker_3b1b9b30b21a9286e814c6fa7d4126bc.bindPopup(popup_e4aabf62153eac3d2cc5f0fd07b41c67)
+        ;
+
+        
+    
+    
+            marker_3b1b9b30b21a9286e814c6fa7d4126bc.bindTooltip(
+                `<div>
+                     CASA QUI
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b1b9b30b21a9286e814c6fa7d4126bc.setIcon(icon_12dee0f3c68613d00c93105cf1ea1f79);
+            
+    
+            var marker_975461a4e657f730cde9a00bc82599cd = L.marker(
+                [38.7098067, -9.1355489],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_965d4f36932831b81aed737973f0cc41 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "glyphicon glyphicon-heart-empty",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3aa0b34488742c4f81a375e75d0c41c0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3dc481c516ae77479a1ed1845a6907a9 = $(`<div id="html_3dc481c516ae77479a1ed1845a6907a9" style="width: 100.0%; height: 100.0%;">         <h4>REDE EX AEQUO</h4>         <p>         <b>Address: </b> Rua dos Fanqueiros, Santa Maria Maior, Madalena, Lisboa, 1100-350, Portugal<br>         </p>         <p>         <b>Category: </b> association<br>         </p>         <p>         <b>Site: </b> https://rea.pt/<br>         </p>         </div>`)[0];
+                popup_3aa0b34488742c4f81a375e75d0c41c0.setContent(html_3dc481c516ae77479a1ed1845a6907a9);
+            
+        
+
+        marker_975461a4e657f730cde9a00bc82599cd.bindPopup(popup_3aa0b34488742c4f81a375e75d0c41c0)
+        ;
+
+        
+    
+    
+            marker_975461a4e657f730cde9a00bc82599cd.bindTooltip(
+                `<div>
+                     REDE EX AEQUO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_975461a4e657f730cde9a00bc82599cd.setIcon(icon_965d4f36932831b81aed737973f0cc41);
+            
+    
+            var marker_bcc045b8bfb3d6679b810d09b6af1c25 = L.marker(
+                [38.7207707, -9.1486475],
+                {
+}
+            ).addTo(map_862d6d6d406f46ba0abdfbb6a8bd20a5);
+        
+    
+            var icon_b26856adf32d00bec2208f742768f1fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "film",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e44b31c7868882726d252d9301c0903 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b03175822bd932544c603054bf2b1547 = $(`<div id="html_b03175822bd932544c603054bf2b1547" style="width: 100.0%; height: 100.0%;">         <h4>CINEMATECA PORTUGUESA</h4>         <p>         <b>Address: </b> Cinemateca Portuguesa - Museu do Cinema, 39, Rua Barata Salgueiro, São Mamede, Santo António, Madalena, Lisboa, 1250-072, Portugal<br>         </p>         <p>         <b>Category: </b> cultural space<br>         </p>         <p>         <b>Site: </b> https://www.cinemateca.pt/<br>         </p>         </div>`)[0];
+                popup_8e44b31c7868882726d252d9301c0903.setContent(html_b03175822bd932544c603054bf2b1547);
+            
+        
+
+        marker_bcc045b8bfb3d6679b810d09b6af1c25.bindPopup(popup_8e44b31c7868882726d252d9301c0903)
+        ;
+
+        
+    
+    
+            marker_bcc045b8bfb3d6679b810d09b6af1c25.bindTooltip(
+                `<div>
+                     CINEMATECA PORTUGUESA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bcc045b8bfb3d6679b810d09b6af1c25.setIcon(icon_b26856adf32d00bec2208f742768f1fa);
+            
+</script>
+</html>
