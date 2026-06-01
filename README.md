@@ -1,4 +1,9 @@
 # Web Scraping, Geolocalização e Mapas Iterativos com Python
+<p align="center">
+  <a href="https://github.com/isabela-santos-ufmg/analise-dados-geolocalizacao.git/lisbon_places_map.html">
+    <img src="https://img.shields.io/badge/🗺️_Interactive_Map-Lisbon-2E8B57?style=for-the-badge" />
+  </a>
+</p>
 Este projeto foi desenvolvido a partir de coleta de dados dinâmicos, geocodificação e visualização espacial com mapas interativos utilizando dados de Lisboa, Portugal.
 ## Web Scraping
 Ferramenta: `Selenium` e `WebDriver Manager`.
