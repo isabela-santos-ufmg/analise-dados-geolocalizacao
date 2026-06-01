@@ -1,6 +1,6 @@
 # Web Scraping, Geolocalização e Mapas Iterativos com Python
 <p align="center">
-  <a href="https://github.com/isabela-santos-ufmg/analise-dados-geolocalizacao.git/lisbon_places_map.html">
+  <a href="https://isabela-santos-ufmg.github.io/analise-dados-geolocalizacao/lisbon_places_map.html">
     <img src="https://img.shields.io/badge/🗺️_Interactive_Map-Lisbon-2E8B57?style=for-the-badge" />
   </a>
 </p>
