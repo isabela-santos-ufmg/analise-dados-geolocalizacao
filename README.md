@@ -9,6 +9,7 @@ Ferramenta: `GeoPy`
 Objetivo: Manipulação de dados com Pandas para ler arquivos CSV, realizar consultas automáticas de coordenadas (latitude e longitude) e enriquecer a base de dados original com as novas colunas geográficas.
 
 ## Plotagem e Criação de Mapas
+![Mapa](./freguesias_folium.gif)
 Ferramenta: `Folium`, `GeoPandas` e `Branca`.
 Objetivo: 
 - Uso de arquivos GeoJSON externos para delimitar e renderizar os limites das freguesias de Lisboa.
